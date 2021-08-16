@@ -1,19 +1,32 @@
-import React, { useState } from 'react'
+import React from 'react'
 import logo from './logo.svg'
 import './App.css'
+import {
+  Flex,
+  Box,
+  Center,
+  Button,
+  useColorMode,
+  useColorModeValue
+} from '@chakra-ui/react'
 
 export default function App() {
-  const [count, setCount] = useState(0)
+  const { colorMode, toggleColorMode } = useColorMode()
+  const color = useColorModeValue("gray.800", "white")
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <Flex color="black" wrap="wrap">
+      <Center w="100%">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React + Electron!</p>
+      </Center>
+      <Center w="100%" color={color}>
+        Hello Vite + React + Electron!
+      </Center>
+      <Box w="100%" textAlign="center" margin="0 10%" color={color}>
         <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
+          <Button colorScheme="blue" onClick={toggleColorMode}>
+            Toggle {colorMode === "light" ? "Dark 🌝" : "Light 🌞"}
+          </Button>
         </p>
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates.
@@ -37,7 +50,7 @@ export default function App() {
             Vite Docs
           </a>
         </p>
-      </header>
-    </div>
+      </Box>
+    </Flex>
   )
 }
