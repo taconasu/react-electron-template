@@ -20,7 +20,8 @@ export default function App() {
         <img src={logo} className="App-logo" alt="logo" />
       </Center>
       <Center w="100%" color={color}>
-        Hello Vite + React + Electron!
+        Hello Vite + React + Electron!<br/>
+        Use Chakra UI!
       </Center>
       <Box w="100%" textAlign="center" margin="0 10%" color={color}>
         <p>

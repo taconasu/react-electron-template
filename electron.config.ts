@@ -1,28 +1,31 @@
-import builder from 'electron-builder'
+import { Configuration } from 'electron-builder'
 
-export default {
-  main: "src/main/index.ts",
-  build: {
-    appId: "com.xland.app",
-    productName: "react-electron-template",
-    mac: {
-      target: 'dmg',
-      icon: 'public/ninja-icon.png'
-    },
-    win: {
-      target: 'nsis',
-      icon: 'public/ninja-icon.png'
-    },
+export const config = {
+  appId: "com.xland.app",
+  productName: "react-electron-template",
+  directories: {
+    output: 'release',
+    app: 'dist',
   },
-  // env: {
-  //   dev: {
-  //     SERVICE_BASE_URL: "https://dev.yourdomain.site",
-  //   },
-  //   test: {
-  //     SERVICE_BASE_URL: "https://test.yourdomain.site",
-  //   },
-  //   release: {
-  //     SERVICE_BASE_URL: "https://release.yourdomain.site",
-  //   },
-  // },
-} as builder.CliOptions
+  extends: null,
+  mac: {
+    target: 'dmg',
+    icon: 'public/ninja-icon.png'
+  },
+  win: {
+    target: 'nsis',
+    icon: 'public/ninja-icon.png'
+  },
+} as Configuration
+
+export const env = {
+  dev: {
+    ENV_NAME: "dev",
+  },
+  test: {
+    ENV_NAME: "test",
+  },
+  release: {
+    ENV_NAME: "release",
+  },
+}

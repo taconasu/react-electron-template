@@ -36,16 +36,8 @@ export class Build extends Base {
    */
    private async buildInstaller() {
     // https://www.electron.build/configuration/configuration
-    console.log(this.config.build)
     return builder.build({
-      config: {
-        directories: {
-          output: this.releaseDir,
-          app: this.distDir,
-        },
-        extends: null,
-        ...this.config.build,
-      } as Configuration,
+      config: this.config as Configuration,
       projectDir: process.cwd(),
       publish: 'never' // TODO: 自動アップロードは一旦オフで
     })

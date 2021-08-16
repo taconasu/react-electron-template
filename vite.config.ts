@@ -1,14 +1,17 @@
+import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
+import path from 'path'
 
 /**
  * https://vitejs.dev/config/
- * @type {import('vite').InlineConfig}
  */
-export default {
-  root: 'src/renderer',
+export default defineConfig({
+  root: path.resolve(process.cwd(), 'src/renderer'),
+  base: '',
   build: {
-    outDir: 'dist',
+    outDir: path.resolve(process.cwd(), 'dist'),
     minify: 'esbuild',
+    emptyOutDir: true,
   },
-  plugins: [reactRefresh()]
-}
+  plugins: [reactRefresh()],
+})
