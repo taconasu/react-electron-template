@@ -12,7 +12,7 @@ export class Dev extends Base {
   }
 
   private viteServer: ViteDevServer
-  protected viteServerPort = 3000
+  protected viteServerPort = Number(process.env.PORT) || 3000
 
   private async createViteServer() {
     const options: vite.InlineConfig = {

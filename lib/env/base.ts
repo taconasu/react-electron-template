@@ -1,6 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import vite from 'vite'
+import dotenv from 'dotenv'
 import { config, env } from '../../electron.config'
 import { Configuration } from 'electron-builder'
 import esbuild from 'esbuild'
@@ -14,18 +15,8 @@ export class Base {
   protected releaseDir: string = path.join(this.rootPath, 'release')
 
   constructor() {
-    this.preparenConfig()
-  }
-
-  /**
-   * 実行に必要な設定をする
-   */
-  protected preparenConfig() {
-    // デフォルト設定
-    if (!this.config) this.config = {
-      appId: 'com.reactron.app',
-      productName: 'react-electron-template'
-    }
+    // .env読み込み
+    dotenv.config()
   }
 
   /**
