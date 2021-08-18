@@ -15,7 +15,4 @@ export default defineConfig({
     emptyOutDir: true,
   },
   plugins: [reactRefresh()],
-  define: {
-    ...dotenv.config().parsed
-  }
 })
