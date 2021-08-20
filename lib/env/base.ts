@@ -46,6 +46,12 @@ export class Base {
       sourcemap: false,
       external: ["electron"],
     });
+    // preload.jsのコピー
+    const preloadFile = path.join(this.rootPath, "src/main/preload.js");
+    fs.copyFileSync(
+      preloadFile,
+      path.join(env === "dev" ? "dev" : "dist", "preload.js")
+    );
     // 環境変数設定
     const envObj = this.env[env];
     envObj.ENV = env;
