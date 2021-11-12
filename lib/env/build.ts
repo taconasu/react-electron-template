@@ -20,6 +20,7 @@ export class Build extends Base {
     localPkgJson.main = "entry.js";
     delete localPkgJson.scripts
     delete localPkgJson.devDependencies
+    delete localPkgJson.build
     localPkgJson.devDependencies = {electron:electronConfig}
     fs.writeFileSync(
       path.join(this.distDir, "package.json"),
