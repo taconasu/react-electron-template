@@ -9,6 +9,14 @@
     "build": "node --require esbuild-register lib/runtime.ts build",
     "serve": "vite preview"
   },
+  "build": {
+    "publish": {
+      "provider": "github",
+      "owner": "taconasu",
+      "repo": "react-electron-template",
+      "releaseType": "release"
+    }
+  },
   "dependencies": {
     "@chakra-ui/react": "^1.6.6",
     "@emotion/react": "^11.4.1",
