@@ -45,7 +45,7 @@ export class Dev extends Base {
 
   private createElectronProcess() {
     try {
-      execa.command('electron dev/entry.js')
+      execa.command('electron dev/index.js')
     } catch(error) {
       log(`${chalk.red('error -')} ${error}`)
     }

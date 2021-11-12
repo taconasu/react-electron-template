@@ -33,7 +33,7 @@ export class Base {
    * @param env
    */
    protected buildMain(env = "dev"): void {
-    const outfile = path.join(env === 'dev' ? 'dev' : 'dist', "entry.js")
+    const outfile = path.join(env === 'dev' ? 'dev' : 'dist', "index.js")
     const entryFilePath = path.join(this.rootPath, 'src/main/index.ts')
     // esbuildによるバンドル処理
     esbuild.buildSync({
