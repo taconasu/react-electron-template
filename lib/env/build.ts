@@ -39,8 +39,7 @@ export class Build extends Base {
     // https://www.electron.build/configuration/configuration
     return builder.build({
       config: this.config as Configuration,
-      projectDir: process.cwd(),
-      publish: 'never' // TODO: 自動アップロードは一旦オフで
+      publish: 'never'
     })
   }
 
