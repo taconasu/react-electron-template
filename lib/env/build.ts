@@ -35,9 +35,9 @@ export class Build extends Base {
   /**
    * electronアプリケーションのインストーラのビルド
    */
-   private async buildInstaller() {
+   private buildInstaller() {
     // https://www.electron.build/configuration/configuration
-    return await builder.build({
+    return builder.build({
       config: this.config as Configuration,
       publish: 'never'
     })
