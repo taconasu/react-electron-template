@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Vite React Electron test application.",
   "author": "JunHotta",
+  "main": "index.js",
   "scripts": {
     "vite": "vite",
     "dev": "node --require esbuild-register lib/runtime.ts dev",
