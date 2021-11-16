@@ -37,7 +37,7 @@ export class Build extends Base {
    */
    private async buildInstaller() {
     // https://www.electron.build/configuration/configuration
-    return builder.build({
+    return await builder.build({
       config: this.config as Configuration,
       publish: 'never'
     })
