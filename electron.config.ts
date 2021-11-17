@@ -1,10 +1,11 @@
 import { Configuration } from 'electron-builder'
 
+/* https://www.electron.build/configuration/configuration.html */
 export const config = {
   appId: "com.xland.app",
   productName: "react-electron-template",
   directories: {
-    output: 'dist',
+    output: 'resources',
     app: 'dist',
   },
   extends: null,
