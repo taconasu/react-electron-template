@@ -5,7 +5,7 @@ export const config = {
   appId: "com.xland.app",
   productName: "react-electron-template",
   directories: {
-    output: 'resources',
+    output: 'dist',
     app: 'dist',
   },
   extends: null,

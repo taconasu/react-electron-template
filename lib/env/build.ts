@@ -43,6 +43,15 @@ export class Build extends Base {
     })
   }
 
+  protected testLog() {
+    log('ディレクトリ一覧を確認します')
+    const dist = fs.readdirSync('dist')
+    dist.forEach(a => log(a))
+
+    const app = fs.readdirSync(`dist/${ fs.statSync('dist/mac') ? 'mac' : 'win-unpacked' }/react-electron-template.app/Contents/Resources/`)
+    app.forEach(a => log(a))
+  }
+
   async start() {
     log('Reactアプリケーションをビルドしています')
     await this.buildRender()
@@ -55,5 +64,7 @@ export class Build extends Base {
 
     log('Electronインストーラを作成しています')
     await this.buildInstaller()
+
+    this.testLog() // TODO:
   }
 }
