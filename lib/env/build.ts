@@ -17,7 +17,6 @@ export class Build extends Base {
     const localPkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, "utf-8"));
     //https://github.com/electron-userland/electron-builder/issues/4157#issuecomment-596419610
     const electronConfig = localPkgJson.devDependencies.electron.replace("^","");
-    localPkgJson.main = "index.js";
     delete localPkgJson.scripts
     delete localPkgJson.devDependencies
     delete localPkgJson.build
