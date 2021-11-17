@@ -48,7 +48,7 @@ export class Build extends Base {
     const dist = fs.readdirSync('dist')
     dist.forEach(a => log(a))
 
-    const app = fs.readdirSync(`dist/${ fs.statSync('dist/mac') ? 'mac' : 'win-unpacked' }/react-electron-template.app/Contents/Resources/`)
+    const app = fs.readdirSync(`dist/${ dist.includes('mac') ? 'mac' : 'win-unpacked' }/react-electron-template.app/Contents/Resources/`)
     app.forEach(a => log(a))
   }
 
