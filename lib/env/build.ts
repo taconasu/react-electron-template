@@ -48,8 +48,13 @@ export class Build extends Base {
     const dist = fs.readdirSync('dist')
     dist.forEach(a => log(a))
 
-    const app = fs.readdirSync(`dist/${ dist.includes('mac') ? 'mac' : 'win-unpacked' }/react-electron-template.app/Contents/Resources/`)
-    app.forEach(a => log(a))
+    if (dist.includes('mac')) {
+      const app = fs.readdirSync(`dist/mac/react-electron-template.app/Contents/Resources/`)
+      app.forEach(a => log(a))
+    } else {
+      const app = fs.readdirSync(`dist/win-unpacked/resources/`)
+      app.forEach(a => log(a))
+    }
   }
 
   async start() {
