@@ -46,14 +46,16 @@ export class Build extends Base {
   protected testLog() {
     log('ディレクトリ一覧を確認します')
     const dist = fs.readdirSync('dist')
-    dist.forEach(a => log(a))
+    dist.forEach(a => console.log(a))
 
     if (dist.includes('mac')) {
+      log('dist/mac/react-electron-template.app/Contents/Resources/')
       const app = fs.readdirSync(`dist/mac/react-electron-template.app/Contents/Resources/`)
-      app.forEach(a => log(a))
+      app.forEach(a => console.log(a))
     } else {
+      log(`dist/win-unpacked/resources/`)
       const app = fs.readdirSync(`dist/win-unpacked/resources/`)
-      app.forEach(a => log(a))
+      app.forEach(a => console.log(a))
     }
   }
 
