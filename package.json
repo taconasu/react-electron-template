@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Vite React Electron test application.",
   "author": "JunHotta",
-  "main": "./dist/index.js",
+  "main": "./index.js",
   "scripts": {
     "vite": "vite",
     "dev": "node --require esbuild-register lib/runtime.ts dev",
@@ -11,7 +11,6 @@
     "serve": "vite preview"
   },
   "build": {
-    "files": ["dist/**/*"],
     "publish": {
       "provider": "github",
       "owner": "taconasu",
