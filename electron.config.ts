@@ -17,6 +17,12 @@ export const config = {
     target: 'nsis',
     icon: 'public/ninja-icon.png'
   },
+  publish: {
+    provider: "github",
+    owner: "taconasu",
+    repo: "react-electron-template",
+    releaseType: "release"
+  }
 } as Configuration
 
 export const env = {
