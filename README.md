@@ -2,6 +2,13 @@
 
 React + Vite + Electron の最小構成のボイラープレート
 
+## リリースについて
+
+:warning: 手動でタグ打ちはしないこと！
+
+手動でタグ打ちをするとタグとpackage.jsonのversion情報に差分が出来てしまう。
+`npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]`を利用して差分が発生しないようにpushすること。
+
 ## Scripts
 
 ### dev
