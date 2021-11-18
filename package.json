@@ -1,6 +1,6 @@
 {
   "name": "react-electron-template",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Vite React Electron test application.",
   "author": "JunHotta",
   "scripts": {
