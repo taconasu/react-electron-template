@@ -1,7 +1,6 @@
 import { Base } from './base'
 import path from 'path'
 import fs from 'fs'
-import builder, { Configuration } from 'electron-builder'
 import log from '../logger'
 
 export class Build extends Base {
@@ -17,9 +16,10 @@ export class Build extends Base {
     const localPkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, "utf-8"));
     //https://github.com/electron-userland/electron-builder/issues/4157#issuecomment-596419610
     const electronConfig = localPkgJson.devDependencies.electron.replace("^","");
-    localPkgJson.main = "entry.js";
+    localPkgJson.main = "index.js";
     delete localPkgJson.scripts
     delete localPkgJson.devDependencies
+    delete localPkgJson.build
     localPkgJson.devDependencies = {electron:electronConfig}
     fs.writeFileSync(
       path.join(this.distDir, "package.json"),
@@ -31,18 +31,6 @@ export class Build extends Base {
     }
   }
 
-  /**
-   * electronアプリケーションのインストーラのビルド
-   */
-   private async buildInstaller() {
-    // https://www.electron.build/configuration/configuration
-    return builder.build({
-      config: this.config as Configuration,
-      projectDir: process.cwd(),
-      publish: 'never' // TODO: 自動アップロードは一旦オフで
-    })
-  }
-
   async start() {
     log('Reactアプリケーションをビルドしています')
     await this.buildRender()
@@ -52,8 +40,5 @@ export class Build extends Base {
 
     log('Electronのエントリファイルをビルドしています')
     this.buildMain('release')
-
-    log('Electronインストーラを作成しています')
-    await this.buildInstaller()
   }
 }

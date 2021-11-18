@@ -1,6 +1,6 @@
 {
   "name": "react-electron-template",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Vite React Electron test application.",
   "author": "JunHotta",
   "scripts": {
@@ -8,6 +8,29 @@
     "dev": "node --require esbuild-register lib/runtime.ts dev",
     "build": "node --require esbuild-register lib/runtime.ts build",
     "serve": "vite preview"
+  },
+  "build": {
+    "appId": "com.xland.app",
+    "productName": "react-electron-template",
+    "directories": {
+      "output": "dist",
+      "app": "dist"
+    },
+    "extends": null,
+    "mac": {
+      "target": "dmg",
+      "icon": "public/ninja-icon.png"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "public/ninja-icon.png"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "taconasu",
+      "repo": "react-electron-template",
+      "releaseType": "release"
+    }
   },
   "dependencies": {
     "@chakra-ui/react": "^1.6.6",

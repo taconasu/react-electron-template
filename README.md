@@ -44,8 +44,3 @@ $ npm run vite
 [Env Variables and Modes - vitejs.dev](https://vitejs.dev/guide/env-and-mode.html)
 
 .envで定義した環境変数はElectronのプロセス内でも参照可能。
-
-### electron.config.ts
-
-Electronの環境ごとに値が変化するような性質の変数はこちらで定義する。
-⚠ 外部サービスのAPIキーのような漏洩するとまずいものは絶対にここに定義しないこと。
