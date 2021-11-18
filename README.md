@@ -11,10 +11,19 @@ React + Vite + Electron の最小構成のボイラープレート
 
 ## Scripts
 
-### dev
+### start
 
 viteでサーバーを起動しElectronアプリケーションを開く。
 ローカル起動時はhttpアクセスをするためHMRが有効。
+
+```sh
+$ npm run start
+```
+
+### dev
+
+ローカル環境で利用しているOSに応じたパッケージを作成する。
+`dist`配下にMacならdmg、Windowsならexeファイルが出力されるのでそれを利用して動作確認をする。
 
 ```sh
 $ npm run dev
@@ -22,12 +31,10 @@ $ npm run dev
 
 ### build
 
-Reactアプリケーションをviteでビルド、
-electron-builderでElectronアプリケーションをビルドする。
+GitHub Releasesにパブリッシュする際に[action-electron-builder](https://github.com/marketplace/actions/electron-builder-action)が利用するコマンド。
 
-```sh
-$ npm run build
-```
+開発時に手動で利用することはない。
+ローカルでパッケージ化して動作確認したい場合は上述した`dev`コマンドを使う。
 
 ### vite
 

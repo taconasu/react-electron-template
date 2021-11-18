@@ -5,6 +5,7 @@
   "author": "JunHotta",
   "scripts": {
     "vite": "vite",
+    "start": "node --require esbuild-register lib/runtime.ts start",
     "dev": "node --require esbuild-register lib/runtime.ts dev",
     "build": "node --require esbuild-register lib/runtime.ts build",
     "serve": "vite preview"

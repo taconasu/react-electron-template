@@ -8,7 +8,6 @@ import os from 'os'
 export class Base {
   protected rootPath: string = process.cwd()
   protected distDir: string = path.join(this.rootPath, 'dist')
-  protected releaseDir: string = path.join(this.rootPath, 'release')
   protected processEnv: dotenv.DotenvParseOutput;
 
   constructor() {
@@ -30,7 +29,7 @@ export class Base {
    * @param env
    */
    protected buildMain(env = "dev"): void {
-    const outfile = path.join(env === 'dev' ? 'dev' : 'dist', "index.js")
+    const outfile = path.join('dist', "index.js")
     const entryFilePath = path.join(this.rootPath, 'src/main/index.ts')
     // esbuildによるバンドル処理
     esbuild.buildSync({
@@ -47,14 +46,10 @@ export class Base {
     const preloadFile = path.join(this.rootPath, "src/main/preload.js");
     fs.copyFileSync(
       preloadFile,
-      path.join(env === "dev" ? "dev" : "dist", "preload.js")
+      path.join("dist", "preload.js")
     );
     // 環境変数設定
-    const envScript = `process.env={
-      ...process.env,
-      ...${JSON.stringify(this.processEnv)},
-      ENV: ${env}
-    };`
+    const envScript = `process.env={...${JSON.stringify(this.processEnv)}, ENV: "${env}"};`
     const js = `${envScript}${os.EOL}${fs.readFileSync(outfile)}`;
     fs.writeFileSync(outfile, js);
   }

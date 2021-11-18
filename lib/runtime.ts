@@ -1,5 +1,6 @@
 import arg from 'arg'
 import path from 'path'
+import { Start } from './env/start'
 import { Dev } from './env/dev'
 import { Build } from './env/build'
 
@@ -19,6 +20,12 @@ if (args['--version']) {
 /*
  * 開発環境起動
  */
+if (args._[0] === 'start') {
+  (async () => {
+    await new Start().start()
+  })()
+}
+
 if (args._[0] === 'dev') {
   (async () => {
     await new Dev().start()

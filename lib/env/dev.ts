@@ -1,64 +1,63 @@
-import log from '../logger'
-import vite, { ViteDevServer } from 'vite'
-import reactRefresh from '@vitejs/plugin-react-refresh'
-import chalk from 'chalk'
-import path from 'path'
-import execa from 'execa'
 import { Base } from './base'
+import builder from 'electron-builder'
+import path from 'path'
+import fs from 'fs'
+import log from '../logger'
 
 export class Dev extends Base {
   constructor() {
     super()
   }
 
-  private viteServer: ViteDevServer
-  protected viteServerPort = Number(process.env.PORT) || 3000
-
-  private async createViteServer() {
-    const options: vite.InlineConfig = {
-      root: path.resolve(process.cwd(), 'src/renderer/'),
-      plugins: [reactRefresh()],
+  /**
+   * Electronアプリケーション用のpackage.json生成
+   */
+  protected preparePackageJson(): void {
+    const pkgJsonPath = path.join(process.cwd(), "package.json");
+    const localPkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, "utf-8"));
+    //https://github.com/electron-userland/electron-builder/issues/4157#issuecomment-596419610
+    const electronConfig = localPkgJson.devDependencies.electron.replace("^","");
+    localPkgJson.main = "index.js";
+    delete localPkgJson.scripts
+    delete localPkgJson.devDependencies
+    delete localPkgJson.build
+    localPkgJson.devDependencies = {electron:electronConfig}
+    fs.writeFileSync(
+      path.join(this.distDir, "package.json"),
+      JSON.stringify(localPkgJson)
+    );
+    // node_modulesがない場合作っておく
+    if (!fs.existsSync(`${this.distDir}/node_modules`)) {
+      fs.mkdirSync(path.join(this.distDir, "node_modules"));
     }
-    this.viteServer = await vite.createServer(options);
-    this.viteServer.httpServer.on("error", (e: any) => this.viteServerOnErr(e))
-    this.viteServer.httpServer.on("data", (e: any) => {
-      console.log(e.toString())
+  }
+
+  /**
+   * electronアプリケーションのインストーラのビルド
+   */
+   private async buildInstaller() {
+    const pkgJsonPath = path.join(process.cwd(), "package.json");
+    const localPkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, "utf-8"));
+    delete localPkgJson.build.publish
+    // https://www.electron.build/configuration/configuration
+    return builder.build({
+      config: localPkgJson.build,
+      projectDir: process.cwd(),
+      publish: 'never'
     })
-    this.viteServer.listen(this.viteServerPort, false)
   }
 
-  private viteServerOnErr(err) {
-    if (err.code === "EADDRINUSE") {
-      console.log(
-        `Port ${this.viteServerPort} is in use, trying another one...`
-      )
-      setTimeout(() => {
-        this.viteServer.close();
-        this.viteServerPort += 1;
-        this.viteServer.listen(this.viteServerPort);
-      }, 100)
-    } else {
-      console.error(chalk.red(`[vite] server error:`))
-      console.error(err)
-    }
-  }
+  async start() {
+    log('Reactアプリケーションをビルドしています')
+    await this.buildRender()
 
-  private createElectronProcess() {
-    try {
-      execa.command('electron dev/index.js')
-    } catch(error) {
-      log(`${chalk.red('error -')} ${error}`)
-    }
-  }
+    log('package.jsonを生成しています')
+    this.preparePackageJson()
 
-  async start(): Promise<void> {
-    log('Electronのエントリファイルを生成しています')
-    this.buildMain('dev')
+    log('Electronのエントリファイルをビルドしています')
+    this.buildMain('release')
 
-    log('Webサーバを起動します')
-    await this.createViteServer()
-
-    log('Electronアプリケーションを起動します')
-    this.createElectronProcess()
+    log('Electronインストーラを作成しています')
+    await this.buildInstaller()
   }
 }
