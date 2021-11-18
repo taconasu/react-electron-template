@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 import path from 'path'
-import dotenv from 'dotenv'
 
 /**
  * https://vitejs.dev/config/
