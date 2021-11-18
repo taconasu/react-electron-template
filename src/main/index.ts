@@ -1,8 +1,9 @@
-import { app, BrowserWindow, dialog, screen } from "electron";
+import { app, BrowserWindow, dialog, ipcMain, screen } from "electron";
 import Store from 'electron-store';
 import { page } from './page';
 import { autoUpdater } from 'electron-updater'
 import log from 'electron-log'
+import path from "path";
 
 // ストアの項目の型定義
 type StoreType = {
@@ -49,7 +50,7 @@ function createWindow () {
     x: pos[0],
     y: pos[1],
     webPreferences: {
-      preload: 'preload.js'
+      preload: path.join(__dirname, "preload.js")
     }
   })
   page.load(window, "index.html")
@@ -98,9 +99,20 @@ app.on('window-all-closed', () => {
   }
 })
 
-//-------------------------------------------
-// 自動アップデート関連のイベント処理
-//-------------------------------------------
+/*
+ * ------------------------
+ * IPC通信
+ * ------------------------
+ */
+ipcMain.on("getVersion", (event: any) => {
+  event.returnValue = app.getVersion();
+});
+
+/*
+ * ------------------------
+ * 自動アップデート関連のイベント処理
+ * ------------------------
+ */
 // アップデートをチェック開始
 autoUpdater.on('checking-for-update', () => {
   log.info(process.pid, 'checking-for-update...');

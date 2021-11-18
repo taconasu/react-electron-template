@@ -22,7 +22,8 @@ export default function App() {
       <Center w="100%" color={color}>
         Hello Vite + React + Electron!<br/>
         Use Chakra UI!<br/>
-        env.VITE_TEST: {import.meta.env.VITE_TEST}
+        env.VITE_TEST: {import.meta.env.VITE_TEST}<br/>
+        version: { window.ipc.getVersion() }
       </Center>
       <Box w="100%" textAlign="center" margin="0 10%" color={color}>
         <p>
