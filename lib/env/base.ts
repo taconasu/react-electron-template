@@ -50,12 +50,11 @@ export class Base {
       path.join(env === "dev" ? "dev" : "dist", "preload.js")
     );
     // 環境変数設定
-    const envObj = {
-      ENV: env
-    }
-    const envScript = `process.env={...${JSON.stringify(
-      this.processEnv
-    )},...${JSON.stringify(envObj)}};`
+    const envScript = `process.env={
+      ...process.env,
+      ...${JSON.stringify(this.processEnv)},
+      ENV: ${env}
+    };`
     const js = `${envScript}${os.EOL}${fs.readFileSync(outfile)}`;
     fs.writeFileSync(outfile, js);
   }
