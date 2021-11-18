@@ -2,14 +2,10 @@ import path from 'path'
 import fs from 'fs'
 import vite from 'vite'
 import dotenv from 'dotenv'
-import { config, env } from '../../electron.config'
-import { Configuration } from 'electron-builder'
 import esbuild from 'esbuild'
 import os from 'os'
 
 export class Base {
-  protected config: Configuration = config
-  protected env = env
   protected rootPath: string = process.cwd()
   protected distDir: string = path.join(this.rootPath, 'dist')
   protected releaseDir: string = path.join(this.rootPath, 'release')
@@ -53,8 +49,9 @@ export class Base {
       path.join(env === "dev" ? "dev" : "dist", "preload.js")
     );
     // 環境変数設定
-    const envObj = this.env[env];
-    envObj.ENV = env;
+    const envObj = {
+      ENV: env
+    };
     const envScript = `process.env={...process.env,...${JSON.stringify(envObj)}};`
     const js = `${envScript}${os.EOL}${fs.readFileSync(outfile)}`;
     fs.writeFileSync(outfile, js);
