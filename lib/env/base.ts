@@ -9,10 +9,11 @@ export class Base {
   protected rootPath: string = process.cwd()
   protected distDir: string = path.join(this.rootPath, 'dist')
   protected releaseDir: string = path.join(this.rootPath, 'release')
+  protected processEnv: dotenv.DotenvParseOutput;
 
   constructor() {
     // .env読み込み
-    dotenv.config()
+    this.processEnv = dotenv.config().parsed
   }
 
   /**
@@ -52,7 +53,9 @@ export class Base {
     const envObj = {
       ENV: env
     }
-    const envScript = `process.env={...process.env,...${JSON.stringify(envObj)}};`
+    const envScript = `process.env={...${JSON.stringify(
+      this.processEnv
+    )},...${JSON.stringify(envObj)}};`
     const js = `${envScript}${os.EOL}${fs.readFileSync(outfile)}`;
     fs.writeFileSync(outfile, js);
   }
