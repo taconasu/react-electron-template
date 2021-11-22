@@ -4,7 +4,7 @@ export default interface Ipc {
 }
 
 declare global {
-  interface Window {
+  export interface Window {
     ipc: Ipc;
   }
 }
