@@ -6,6 +6,8 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'standard',
     'prettier',
@@ -24,6 +26,16 @@ module.exports = {
     // import React from 'react' のLintエラーの回避
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
+
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+      },
+    ],
+    '@typescript-eslint/no-explicit-any': 'off',
   },
   settings: {
     react: {
