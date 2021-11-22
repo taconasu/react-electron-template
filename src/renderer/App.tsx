@@ -1,18 +1,18 @@
-import React from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 import {
   Flex,
   Box,
   Center,
   Button,
   useColorMode,
-  useColorModeValue
-} from '@chakra-ui/react'
+  useColorModeValue,
+} from '@chakra-ui/react';
 
 export default function App() {
-  const { colorMode, toggleColorMode } = useColorMode()
-  const color = useColorModeValue("gray.800", "white")
+  const { colorMode, toggleColorMode } = useColorMode();
+  const color = useColorModeValue('gray.800', 'white');
 
   return (
     <Flex color="black" wrap="wrap">
@@ -20,15 +20,18 @@ export default function App() {
         <img src={logo} className="App-logo" alt="logo" />
       </Center>
       <Center w="100%" color={color}>
-        Hello Vite + React + Electron!<br/>
-        Use Chakra UI!<br/>
-        env.VITE_TEST: {import.meta.env.VITE_TEST}<br/>
-        version: { window.ipc.getVersion() }
+        Hello Vite + React + Electron!
+        <br />
+        Use Chakra UI!
+        <br />
+        env.VITE_TEST: {import.meta.env.VITE_TEST}
+        <br />
+        version: {window.ipc.getVersion()}
       </Center>
       <Box w="100%" textAlign="center" margin="0 10%" color={color}>
         <p>
           <Button colorScheme="blue" onClick={toggleColorMode}>
-            Toggle {colorMode === "light" ? "Dark 🌝" : "Light 🌞"}
+            Toggle {colorMode === 'light' ? 'Dark 🌝' : 'Light 🌞'}
           </Button>
         </p>
         <p>
@@ -55,5 +58,5 @@ export default function App() {
         </p>
       </Box>
     </Flex>
-  )
+  );
 }
