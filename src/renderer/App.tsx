@@ -26,7 +26,7 @@ export default function App() {
         <br />
         env.VITE_TEST: {import.meta.env.VITE_TEST}
         <br />
-        env.HOGE: {import.meta.env.HOGE}
+        env.VITE_HOGE: {import.meta.env.VITE_HOGE}
         <br />
         version: {window.ipc.getVersion()}
       </Center>
