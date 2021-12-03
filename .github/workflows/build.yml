@@ -26,8 +26,8 @@ jobs:
       - name: Create dot env file
         run: |
           touch .env
-          echo -e "VITE_TEST=${{ secrets.VITE_TEST }} \n" >> .env
-          echo -e "VITE_HOGE=${{ secrets.VITE_HOGE }} \n" >> .env
+          echo "VITE_TEST=${{ secrets.VITE_TEST }}" >> .env
+          echo "VITE_HOGE=${{ secrets.VITE_HOGE }}" >> .env
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
