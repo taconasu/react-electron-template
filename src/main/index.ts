@@ -54,6 +54,7 @@ function createWindow() {
     y: pos[1],
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      sandbox: true,
     },
   });
   page.load(window, 'index.html');

@@ -26,6 +26,8 @@ export default function App() {
         <br />
         env.VITE_TEST: {import.meta.env.VITE_TEST}
         <br />
+        env.HOGE: {import.meta.env.HOGE}
+        <br />
         version: {window.ipc.getVersion()}
       </Center>
       <Box w="100%" textAlign="center" margin="0 10%" color={color}>
