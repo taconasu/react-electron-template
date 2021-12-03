@@ -46,7 +46,7 @@ export class Base {
     const preloadFile = path.join(this.rootPath, 'src/main/preload.js');
     fs.copyFileSync(preloadFile, path.join('dist', 'preload.js'));
     // 環境変数設定
-    const envScript = `process.env={...process.env, ...${JSON.stringify(
+    const envScript = `process.env={...${JSON.stringify(
       this.processEnv
     )}, ENV: "${env}"};`;
     const js = `${envScript}${os.EOL}${fs.readFileSync(outfile)}`;
